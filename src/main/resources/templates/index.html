@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus Hub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f0ff;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #663399;
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 27px;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #eee1ff;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #e0c8ff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 65px 20px 45px;
+        }
+
+        .hero h2 {
+            color: #663399;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 24px;
+            background: #663399;
+            color: white;
+            padding: 13px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero-button:hover {
+            background: #512780;
+        }
+
+        .services {
+            max-width: 1150px;
+            margin: auto;
+            padding: 25px 25px 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #663399;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(70, 30, 100, 0.09);
+            border: 1px solid #eee4ff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 9px 22px rgba(70, 30, 100, 0.15);
+        }
+
+        .icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #663399;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+            min-height: 45px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card a {
+            display: inline-block;
+            background: #663399;
+            color: white;
+            padding: 11px 15px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .feature-card a:hover {
+            background: #512780;
+        }
+
+        .about {
+            background: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 10px;
+        }
+
+        .about h2 {
+            color: #663399;
+            margin-bottom: 12px;
+        }
+
+        .about p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        footer {
+            background: #442266;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                text-align: center;
+                justify-content: center;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 8px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>🎓 Smart Campus Hub</h1>
+        <p>Your campus, smarter and simpler.</p>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Welcome to Smart Campus Hub</h2>
+
+    <p>
+        Manage your campus activities in one place.
+        Find the shortest route, search student details,
+        explore events, submit complaints, and report lost
+        or found items with ease.
+    </p>
+
+    <a href="#services" class="hero-button">Explore Services</a>
+</section>
+
+<section class="services" id="services">
+    <h2 class="section-title">Campus Services</h2>
+
+    <p class="section-description">
+        Choose a service to get started.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="icon">🗺️</div>
+            <h3>Campus Navigation</h3>
+            <p>
+                Find the shortest route between campus
+                locations using the BFS algorithm.
+            </p>
+            <a href="/navigation">Open Navigation</a>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">👩‍🎓</div>
+            <h3>Student Directory</h3>
+            <p>
+                Search student details and departments
+                using a student ID.
+            </p>
+            <a href="/students">Open Directory</a>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📅</div>
+            <h3>Campus Events</h3>
+            <p>
+                Explore campus events, add new events,
+                and manage registration requests.
+            </p>
+            <a href="/events">Explore Events</a>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📢</div>
+            <h3>Complaint Management</h3>
+            <p>
+                Submit campus-related complaints and
+                view the submitted complaint list.
+            </p>
+            <a href="/complaints">Submit Complaint</a>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🔍</div>
+            <h3>Lost &amp; Found</h3>
+            <p>
+                Report lost or found belongings and
+                check the details of reported items.
+            </p>
+            <a href="/lost-found">Open Lost &amp; Found</a>
+        </div>
+
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h2>About Smart Campus Hub</h2>
+    <p>
+        Smart Campus Hub is a student-focused web application
+        designed to make campus services easier to access.
+        It uses Java and Spring Boot for application logic,
+        along with HTML, CSS, and Thymeleaf for the interface.
+    </p>
+</section>
+
+<footer>
+    <p>© 2026 Smart Campus Hub | Making Campus Life Easier</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Complaint Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f0ff;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #ddd;
+        }
+
+        h1, h2 {
+            color: #663399;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            background: #663399;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        li {
+            background: #f5f0ff;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        a {
+            color: #663399;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Campus Complaint Box</h1>
+    <p>Submit your campus-related complaints here.</p>
+
+    <p th:if="${message}" th:text="${message}"></p>
+
+    <form action="/complaints/add" method="post">
+        <input type="text"
+               name="complaint"
+               placeholder="Enter your complaint"
+               required>
+        <button type="submit">Submit Complaint</button>
+    </form>
+
+    <h2>Submitted Complaints</h2>
+
+    <p>Total Complaints:
+        <strong th:text="${count}">0</strong>
+    </p>
+
+    <ul>
+        <li th:each="item : ${complaints}"
+            th:text="${item}">
+        </li>
+    </ul>
+
+    <p th:if="${#lists.isEmpty(complaints)}">
+        No complaints submitted yet.
+    </p>
+
+    <a href="/">Back to Home</a>
+
+</div>
+</body>
+</html>

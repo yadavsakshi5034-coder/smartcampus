@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Navigation | Smart Campus Hub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f7ff;
+            color: #292344;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: #5b35a5;
+            color: white;
+            padding: 20px 8%;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        .panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #4c368514;
+        }
+
+        h1 {
+            color: #5b35a5;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #68627a;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d8ccef;
+            border-radius: 8px;
+            background: white;
+            font-size: 16px;
+            color: #292344;
+        }
+
+        select:focus {
+            outline: 2px solid #8d6bd1;
+            border-color: #6c43bd;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px 20px;
+            background: #6c43bd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #482583;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f0eaff;
+            border: 1px solid #ded0fa;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+
+        .result h2 {
+            color: #5b35a5;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .route {
+            color: #5b35a5;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+            margin: 8px 0;
+        }
+
+        .stops {
+            margin-top: 10px;
+            color: #49415f;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 22px;
+            color: #5b35a5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .panel {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/">← Smart Campus Hub</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="panel">
+
+            <h1>🗺️ Campus Navigation</h1>
+
+            <p class="description">
+                Find the shortest route between campus locations.
+                Select your starting point and destination below.
+            </p>
+
+            <form action="/navigation" method="get">
+
+                <label for="start">Starting Location</label>
+
+                <select id="start" name="start" required>
+                    <option value="Gate"
+                            th:selected="${selectedStart == 'Gate'}">
+                        Main Gate
+                    </option>
+
+                    <option value="Library"
+                            th:selected="${selectedStart == 'Library'}">
+                        Library
+                    </option>
+
+                    <option value="Canteen"
+                            th:selected="${selectedStart == 'Canteen'}">
+                        Canteen
+                    </option>
+
+                    <option value="Admin"
+                            th:selected="${selectedStart == 'Admin'}">
+                        Admin Office
+                    </option>
+
+                    <option value="Lab"
+                            th:selected="${selectedStart == 'Lab'}">
+                        Computer Lab
+                    </option>
+                </select>
+
+                <label for="end">Destination</label>
+
+                <select id="end" name="end" required>
+                    <option value="Gate"
+                            th:selected="${selectedEnd == 'Gate'}">
+                        Main Gate
+                    </option>
+
+                    <option value="Library"
+                            th:selected="${selectedEnd == 'Library'}">
+                        Library
+                    </option>
+
+                    <option value="Canteen"
+                            th:selected="${selectedEnd == 'Canteen'}">
+                        Canteen
+                    </option>
+
+                    <option value="Admin"
+                            th:selected="${selectedEnd == 'Admin'}">
+                        Admin Office
+                    </option>
+
+                    <option value="Lab"
+                            th:selected="${selectedEnd == 'Lab'}">
+                        Computer Lab
+                    </option>
+                </select>
+
+                <button type="submit">
+                    Find Shortest Route
+                </button>
+
+            </form>
+
+            <div class="result"
+                 th:if="${searched}">
+
+                <h2>✅ Shortest Route Found</h2>
+
+                <p class="route"
+                   th:text="${route}">
+                    Route will appear here
+                </p>
+
+                <p class="stops">
+                    <strong>Number of stops/edges:</strong>
+                    <span th:text="${stops}">0</span>
+                </p>
+
+            </div>
+
+            <a class="back" href="/">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

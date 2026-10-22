@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Lost & Found</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f0ff;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #ddd;
+        }
+        h1, h2 { color: #663399; }
+        input, select {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            background: #663399;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .item {
+            background: #f5f0ff;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+        }
+        a { color: #663399; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Campus Lost & Found</h1>
+    <p>Report a lost or found item on campus.</p>
+
+    <p th:if="${message}" th:text="${message}"></p>
+
+    <form action="/lost-found/add" method="post">
+        <label>Item Name</label>
+        <input type="text" name="itemName"
+               placeholder="e.g. Blue water bottle" required>
+
+        <label>Report Type</label>
+        <select name="type" required>
+            <option value="Lost">Lost</option>
+            <option value="Found">Found</option>
+        </select>
+
+        <label>Location</label>
+        <input type="text" name="location"
+               placeholder="e.g. College library" required>
+
+        <button type="submit">Submit Item</button>
+    </form>
+
+    <h2>Reported Items</h2>
+
+    <p th:if="${#maps.isEmpty(items)}">
+        No items reported yet.
+    </p>
+
+    <div th:each="entry : ${items}" class="item">
+        <strong th:text="${entry.value.itemName}">Item</strong>
+        <p>Report: <span th:text="${entry.value.type}"></span></p>
+        <p>Location: <span th:text="${entry.value.location}"></span></p>
+        <small>ID: <span th:text="${entry.value.id}"></span></small>
+    </div>
+
+    <p><a href="/">Back to Home</a></p>
+</div>
+</body>
+</html>

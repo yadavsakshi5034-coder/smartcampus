@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Events | Smart Campus Hub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f7ff;
+            color: #292344;
+        }
+
+        nav {
+            background: #5b35a5;
+            padding: 20px 8%;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .panel {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #4c368514;
+            margin-bottom: 22px;
+        }
+
+        h1, h2 {
+            color: #5b35a5;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        h2 {
+            font-size: 21px;
+        }
+
+        p {
+            color: #68627a;
+            line-height: 1.6;
+        }
+
+        .event-list {
+            padding-left: 22px;
+        }
+
+        .event-list li {
+            padding: 9px 0;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8ccef;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 13px;
+            background: #6c43bd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #482583;
+        }
+
+        .message {
+            background: #f0eaff;
+            padding: 13px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #5b35a5;
+        }
+
+        .queue-list {
+            padding-left: 22px;
+        }
+
+        .queue-list li {
+            padding: 7px 0;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 5px 0 25px;
+            color: #5b35a5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="/">← Smart Campus Hub</a>
+</nav>
+
+<div class="container">
+
+    <h1>🎉 Campus Event Manager</h1>
+    <p style="margin-bottom: 22px;">
+        Explore campus events and join the registration queue.
+    </p>
+
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+
+    <div class="panel">
+        <h2>📅 Upcoming Events</h2>
+
+        <p th:if="${#lists.isEmpty(events)}">
+            No events are available yet.
+        </p>
+
+        <ol class="event-list">
+            <li th:each="event : ${events}" th:text="${event}"></li>
+        </ol>
+    </div>
+
+    <div class="panel">
+        <h2>➕ Add a Campus Event</h2>
+
+        <form action="/events/add" method="post">
+            <label for="eventName">Event Name</label>
+
+            <input
+                type="text"
+                id="eventName"
+                name="eventName"
+                placeholder="Enter event name"
+                required
+            >
+
+            <button type="submit">Add Event</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>🙋 Register for an Event</h2>
+
+        <form action="/events/register" method="post">
+            <label for="studentName">Student Name</label>
+
+            <input
+                type="text"
+                id="studentName"
+                name="studentName"
+                placeholder="Enter your name"
+                required
+            >
+
+            <button type="submit">Join Registration Queue</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>👥 Registration Queue (FIFO)</h2>
+
+        <p th:if="${#lists.isEmpty(registrationQueue)}">
+            No students have registered yet.
+        </p>
+
+        <ol class="queue-list">
+            <li th:each="student : ${registrationQueue}"
+                th:text="${student}"></li>
+        </ol>
+    </div>
+
+    <a class="back" href="/">← Back to Home</a>
+
+</div>
+
+</body>
+</html>

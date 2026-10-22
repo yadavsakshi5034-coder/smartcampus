@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Directory | Smart Campus Hub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f7ff;
+            color: #292344;
+        }
+
+        nav {
+            background: #5b35a5;
+            padding: 20px 8%;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        .panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #4c368514;
+        }
+
+        h1 {
+            color: #5b35a5;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.7;
+            color: #68627a;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 20px 0 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d8ccef;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #6c43bd;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #482583;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f0eaff;
+        }
+
+        .result h2 {
+            color: #5b35a5;
+            margin-bottom: 12px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 22px;
+            color: #5b35a5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="/">← Smart Campus Hub</a>
+</nav>
+
+<div class="container">
+    <div class="panel">
+
+        <h1>🎓 Student Directory</h1>
+
+        <p>Enter a student ID to find the student's details.</p>
+
+        <form action="/students" method="get">
+            <label for="studentId">Student ID</label>
+
+            <input
+                type="text"
+                id="studentId"
+                name="studentId"
+                placeholder="Enter ID, e.g. 101"
+                th:value="${studentId}"
+                required
+            >
+
+            <button type="submit">Search Student</button>
+        </form>
+
+        <div class="result" th:if="${searched}">
+
+            <div th:if="${student != null}">
+                <h2>Student Found</h2>
+                <p>
+                    <strong>Name:</strong>
+                    <span th:text="${student.name}"></span>
+                </p>
+                <p>
+                    <strong>Department:</strong>
+                    <span th:text="${student.department}"></span>
+                </p>
+            </div>
+
+            <div th:if="${student == null}">
+                <h2>Student Not Found</h2>
+                <p>Please check the student ID and try again.</p>
+            </div>
+
+        </div>
+
+        <a class="back" href="/">← Back to Home</a>
+
+    </div>
+</div>
+
+</body>
+</html>
